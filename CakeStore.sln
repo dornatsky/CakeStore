@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeStore", "CakeStore\CakeStore.csproj", "{6FFA5EAD-2DCE-4A3A-B9D2-9CF826126C18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeStore.Tests", "CakeStore.Tests\CakeStore.Tests.csproj", "{DF70D360-4213-42A7-8A6C-6870A91FFC4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FFA5EAD-2DCE-4A3A-B9D2-9CF826126C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFA5EAD-2DCE-4A3A-B9D2-9CF826126C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFA5EAD-2DCE-4A3A-B9D2-9CF826126C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFA5EAD-2DCE-4A3A-B9D2-9CF826126C18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF70D360-4213-42A7-8A6C-6870A91FFC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF70D360-4213-42A7-8A6C-6870A91FFC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF70D360-4213-42A7-8A6C-6870A91FFC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF70D360-4213-42A7-8A6C-6870A91FFC4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
