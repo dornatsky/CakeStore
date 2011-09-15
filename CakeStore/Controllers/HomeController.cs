@@ -9,6 +9,7 @@ using System.ComponentModel.Composition;
 namespace CakeStore.Controllers
 {
     [Export(typeof(HomeController))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class HomeController : Controller
     {
         [Import]
@@ -16,7 +17,19 @@ namespace CakeStore.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            if (_session.CurrentUser == null)
+            {
+                _session.SetUser("test", this);
+
+                HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["User"];
+                cookie.Expires = DateTime.Now.AddDays(1);
+                this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+            }
+            else
+            {
+                ViewBag.Message = "test";
+            }
+
 
             return View();
         }
