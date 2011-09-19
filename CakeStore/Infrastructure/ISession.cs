@@ -8,7 +8,7 @@ namespace CakeStore.Utils
 {
     public interface ISession
     {
-        string CurrentUser { get; }
+        string GetCurrentUser (Controller controller);
         void SetUser(string user, Controller controller);
     }
 }

@@ -1,7 +1,18 @@
-﻿@{
+﻿@model CakeStore.Models.LoginViewModel
+       
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div>
-@ViewBag.Message
+<div id="mainForm">
+@{
+    if (Model.IsLoggedIn){
+        <input type ="button" value="Order Cake" />
+    }
+    else    {
+        @:Your name?
+        <input type = "text" id="userName"/>
+    }
+}
+
 </div>

@@ -14,30 +14,21 @@ namespace CakeStore.Utils
         private const string _userCookieName = "User";
         private string _user;
 
-        private HttpCookieCollection _requestCookies
-        {
-            get { return HttpContext.Current.Request.Cookies; }
-        }
-
         public void SetUser(string user, Controller controller)
         {
             HttpCookie cookie = new HttpCookie(_userCookieName);
             cookie.Value = user;
+            cookie.Expires = DateTime.Now.AddDays(1);
             controller.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
 
             _user = user;
         }
 
-        public string CurrentUser
+        public string GetCurrentUser(Controller controller)
         {
-            get
-            {
-                var result = _requestCookies[_userCookieName];
-                if (result != null)
-                    return result.Value;
-                else
-                    return _user;
-            }
+            var result = controller.HttpContext.Request.Cookies[_userCookieName];
+            string value = result.Value;
+            return value ?? _user;
         }
     }
 }

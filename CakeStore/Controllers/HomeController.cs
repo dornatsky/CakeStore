@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CakeStore.Utils;
 using System.ComponentModel.Composition;
+using CakeStore.Models;
 
 namespace CakeStore.Controllers
 {
@@ -12,26 +13,24 @@ namespace CakeStore.Controllers
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class HomeController : Controller
     {
-        [Import]
         private ISession _session;
+
+        [ImportingConstructor]
+        public HomeController(ISession session)
+        {
+            _session = session;
+        }
 
         public ActionResult Index()
         {
-            if (_session.CurrentUser == null)
-            {
-                _session.SetUser("test", this);
-
-                HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["User"];
-                cookie.Expires = DateTime.Now.AddDays(1);
-                this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-            }
+            LoginViewModel viewModel = new LoginViewModel();
+            string user = _session.GetCurrentUser(this);
+            if (user == null)
+                viewModel.IsLoggedIn = false;
             else
-            {
-                ViewBag.Message = "test";
-            }
+                viewModel.IsLoggedIn = true;
 
-
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult About()
@@ -42,13 +41,12 @@ namespace CakeStore.Controllers
         [HttpPost]
         public void StartSession(string userName)
         {
-
+            _session.SetUser(userName, this);
         }
 
         [HttpPost]
         public void OrderCake()
         {
-
         }
     }
 }
