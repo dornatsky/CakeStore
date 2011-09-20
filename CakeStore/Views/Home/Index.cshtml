@@ -2,23 +2,26 @@
 @section Scripts
 {
     <script type="text/javascript">
-            $(document).ready(function () {
-                $("#userName").keydown(function (event) {
-                    var s = $("#userName").val();
-                    if (event.keyCode == '13') {
-                        $.ajax({
-                            url: '@Url.Action("StartSession")',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            contentType: 'application/JSON',
-                            data: "{userName:'"+ s + "'}",
-                            success: function(result) {
-                                alert ("success");
-                            }
-                        });
-                    }
-                })
-            });
+        $(document).ready(function () {
+            var userName = $("#userName");
+
+            userName.keydown(function (event) {
+                var s = userName.val();
+                if (event.keyCode == '13') {
+                    $.ajax({
+                        url: '@Url.Action("StartSession")',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        contentType: 'application/JSON',
+                        data: "{userName:'" + s + "'}",
+                        success: function (result) {
+                            $("#orderForm").css("visibility", "visible");
+                            $("#loginForm").hide();
+                        }
+                    });
+                }
+            })
+        });
     </script>
 }
 @{
@@ -26,14 +29,18 @@
 }
 <div id="mainForm">
     @{
-        if (Model.IsLoggedIn)
+        string formVisibility = "visible";
+        if (!Model.IsLoggedIn)
         {
-        <input type="button" value="Order Cake" />
+            formVisibility = "collapse";
+            <div id="loginForm">
+                <text>Your name?</text>
+                <input type="text" id="userName" />
+            </div>
         }
-        else
-        {
-        @:Your name?
-        <input type="text" id="userName" />
-        }
+     
+        <div style="visibility:@formVisibility" id="orderForm">
+            <input type="button" value="Order Cake" />
+        </div>
     }
 </div>

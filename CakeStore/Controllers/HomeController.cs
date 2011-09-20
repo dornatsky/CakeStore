@@ -41,7 +41,7 @@ namespace CakeStore.Controllers
         [HttpPost]
         public void StartSession(string userName)
         {
-            _session.SetUser(userName, this);
+            //_session.SetUser(userName, this);
         }
 
         [HttpPost]
