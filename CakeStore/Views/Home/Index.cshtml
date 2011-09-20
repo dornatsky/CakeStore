@@ -1,18 +1,39 @@
 ﻿@model CakeStore.Models.LoginViewModel
-       
+@section Scripts
+{
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#userName").keydown(function (event) {
+                    var s = $("#userName").val();
+                    if (event.keyCode == '13') {
+                        $.ajax({
+                            url: '@Url.Action("StartSession")',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            contentType: 'application/JSON',
+                            data: "{userName:'"+ s + "'}",
+                            success: function(result) {
+                                alert ("success");
+                            }
+                        });
+                    }
+                })
+            });
+    </script>
+}
 @{
     ViewBag.Title = "Home Page";
 }
-
 <div id="mainForm">
-@{
-    if (Model.IsLoggedIn){
-        <input type ="button" value="Order Cake" />
-    }
-    else    {
+    @{
+        if (Model.IsLoggedIn)
+        {
+        <input type="button" value="Order Cake" />
+        }
+        else
+        {
         @:Your name?
-        <input type = "text" id="userName"/>
+        <input type="text" id="userName" />
+        }
     }
-}
-
 </div>

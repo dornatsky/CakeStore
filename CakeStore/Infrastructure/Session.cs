@@ -26,9 +26,12 @@ namespace CakeStore.Utils
 
         public string GetCurrentUser(Controller controller)
         {
-            var result = controller.HttpContext.Request.Cookies[_userCookieName];
-            string value = result.Value;
-            return value ?? _user;
+            var cookie = controller.HttpContext.Request.Cookies[_userCookieName];
+            string result = null;
+            if (cookie != null)
+                result = cookie.Value;
+
+            return result ?? _user;
         }
     }
 }
