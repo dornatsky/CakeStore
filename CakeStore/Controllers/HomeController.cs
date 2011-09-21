@@ -41,12 +41,13 @@ namespace CakeStore.Controllers
         [HttpPost]
         public void StartSession(string userName)
         {
-            //_session.SetUser(userName, this);
+            _session.SetUser(userName, this);
         }
 
         [HttpPost]
-        public void OrderCake()
+        public ActionResult OrderCake()
         {
+            return RedirectToAction("Index");
         }
     }
 }

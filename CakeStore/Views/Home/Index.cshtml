@@ -40,7 +40,10 @@
         }
      
         <div style="visibility:@formVisibility" id="orderForm">
-            <input type="button" value="Order Cake" />
+            @using (Html.BeginForm("OrderCake","Home"))
+            {
+                <input type="submit" value="Order Cake" />
+            }
         </div>
     }
 </div>
