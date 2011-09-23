@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.Composition.Hosting;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.ComponentModel.Composition.Hosting;
-using System.Reflection;
 using CakeStore.Infrastructure;
+using SignalR.Routing;
 
 namespace CakeStore
 {
@@ -22,6 +19,8 @@ namespace CakeStore
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            RouteTable.Routes.MapConnection<ProgressConnection>("progress", "progress/{*operation}");
 
             routes.MapRoute(
                 "Default", // Route name

@@ -23,6 +23,19 @@
             })
         });
     </script>
+    <script type="text/javascript">
+        $(function () {
+            var connection = $.connection('progress');
+            connection.received(function (data) {
+                $('#messages').append('<li>' + data + '</li>');
+            });
+            $("#orderCake").click(
+                function () {
+                    connection.send();
+                });
+            connection.start();
+        });
+    </script>
 }
 @{
     ViewBag.Title = "Home Page";
@@ -33,17 +46,17 @@
         if (!Model.IsLoggedIn)
         {
             formVisibility = "collapse";
-            <div id="loginForm">
-                <text>Your name?</text>
-                <input type="text" id="userName" />
-            </div>
+        <div id="loginForm">
+            <text>Your name?</text>
+            <input type="text" id="userName" />
+        </div>
         }
      
         <div style="visibility:@formVisibility" id="orderForm">
-            @using (Html.BeginForm("OrderCake","Home"))
-            {
-                <input type="submit" value="Order Cake" />
-            }
+            <input type="button" value="Order Cake" id="orderCake" />
+        </div>
+        
+        <div id="messages">
         </div>
     }
 </div>
